@@ -1,0 +1,62 @@
+<head>
+	<head><title> Monte carlo </title></head>
+      <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<link href="/static/def.css" rel="stylesheet" type="text/css" />
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.6.10.min.js"></script>
+      <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <script type=text/javascript>
+        $(function() {
+            $('#calculate').click(function(){
+              $.ajax({
+                url: '/addnumber',
+                data:{
+                  y: $('#y').val(),
+		  z: $('#z').val(),
+		  t: $('#t').val(),
+                },
+                dataType: 'JSON',
+                type: 'GET',
+                success: function(data){
+                    $("#result").html(data.result);		    
+                }
+                });
+             });
+        });
+  </script>
+  </head>
+ <body>
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Calculate risks of using certain trading signals for a trading strategy value using Monte carlo Method</h3>
+      </div>
+      <hr/>
+      <div>
+      <p>
+   Enter the minhist value: <input type="number" id='y' size="5" name="y"><br><br>
+   Enter the number of Shots: <input type="number" id='z' size="5" name="z"><br><br>
+   <h2> For buy enter '1' else for sell enter '0' :- </h2> <br><br>
+   Buy or sell: <input type="number" id='t' size="5" name="t"><br><br>
+    value:
+    <span id="result">?</span><br><br>
+    <p><button class="btn btn-success" id="calculate">calculate</button>
+      </form>
+      </div>
+    </div>
+  </body>	
+<div id="down">
+		<h3>Chart :&nbsp;</h3>
+		<form id="stats" method="post" action="/chart">
+			<h4><input type="submit" size="5" name="draw" value="Draw Chart"/>
+			<input type="submit" name='cancel' value="Cancel"
+			onclick="window.location='/'; return false;" /><br/></h4>
+		</form>
+		
+		{% if note %}
+		<h3 style="color: #11FFFF">
+			{{ note }}
+		</h3>
+		{% endif %}
+	
+	</div>
+
